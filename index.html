@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Calculadora Inteligente</title>
+<meta name="description" content="Calculadora básica, científica e conversor de moedas, com assistente integrado.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-deco" aria-hidden="true">
+  <span class="deco-symbol deco-1">π</span>
+  <span class="deco-symbol deco-2">√</span>
+  <span class="deco-symbol deco-3">∑</span>
+  <span class="deco-symbol deco-4">÷</span>
+</div>
+
+<div class="app">
+
+  <header class="app-header">
+    <h1 class="app-title">Calculadora Inteligente</h1>
+    <nav class="tabs" aria-label="Modo de cálculo">
+      <button class="tab-btn is-active" data-section="basica" role="tab" aria-selected="true" aria-controls="basica">Básica</button>
+      <button class="tab-btn" data-section="cientifica" role="tab" aria-selected="false" aria-controls="cientifica">Científica</button>
+      <button class="tab-btn" data-section="moedas" role="tab" aria-selected="false" aria-controls="moedas">Moedas</button>
+    </nav>
+  </header>
+
+  <main class="app-main">
+
+    <!-- ===================== SECÇÃO 1 — CALCULADORA BÁSICA ===================== -->
+    <section id="basica" class="calc-section is-active" role="tabpanel" aria-label="Calculadora básica">
+      <div class="display">
+        <div class="display-history" id="basica-history" aria-live="off">&nbsp;</div>
+        <div class="display-value" id="basica-value" aria-live="polite">0</div>
+      </div>
+
+      <div class="keypad keypad-4col">
+        <button class="key key-fn" data-action="clear">C</button>
+        <button class="key key-fn" data-action="backspace" aria-label="Apagar último dígito">⌫</button>
+        <button class="key key-fn" data-action="percent">%</button>
+        <button class="key key-op" data-action="op" data-op="/">÷</button>
+
+        <button class="key key-num" data-digit="7">7</button>
+        <button class="key key-num" data-digit="8">8</button>
+        <button class="key key-num" data-digit="9">9</button>
+        <button class="key key-op" data-action="op" data-op="*">×</button>
+
+        <button class="key key-num" data-digit="4">4</button>
+        <button class="key key-num" data-digit="5">5</button>
+        <button class="key key-num" data-digit="6">6</button>
+        <button class="key key-op" data-action="op" data-op="-">−</button>
+
+        <button class="key key-num" data-digit="1">1</button>
+        <button class="key key-num" data-digit="2">2</button>
+        <button class="key key-num" data-digit="3">3</button>
+        <button class="key key-op" data-action="op" data-op="+">+</button>
+
+        <button class="key key-fn" data-action="sign">±</button>
+        <button class="key key-num" data-digit="0">0</button>
+        <button class="key key-fn" data-action="decimal">.</button>
+        <button class="key key-eq" data-action="equals">=</button>
+      </div>
+
+      <ol class="history-list" id="basica-history-list" aria-label="Histórico de operações"></ol>
+    </section>
+
+    <!-- ===================== SECÇÃO 2 — CALCULADORA CIENTÍFICA ===================== -->
+    <section id="cientifica" class="calc-section" role="tabpanel" aria-label="Calculadora científica" hidden>
+      <div class="display">
+        <div class="display-history" id="cientifica-history" aria-live="off">&nbsp;</div>
+        <div class="display-value" id="cientifica-value" aria-live="polite">0</div>
+      </div>
+
+      <div class="keypad keypad-6col">
+        <button class="key key-sci" data-insert="sin(">sin</button>
+        <button class="key key-sci" data-insert="cos(">cos</button>
+        <button class="key key-sci" data-insert="tan(">tan</button>
+        <button class="key key-sci" data-insert="asin(">sin⁻¹</button>
+        <button class="key key-sci" data-insert="acos(">cos⁻¹</button>
+        <button class="key key-sci" data-insert="atan(">tan⁻¹</button>
+
+        <button class="key key-sci" data-insert="log(">log</button>
+        <button class="key key-sci" data-insert="ln(">ln</button>
+        <button class="key key-sci" data-insert="^">xʸ</button>
+        <button class="key key-sci" data-insert="sqrt(">√</button>
+        <button class="key key-sci" data-insert="cbrt(">∛</button>
+        <button class="key key-sci" data-insert="nroot(">ʸ√x</button>
+
+        <button class="key key-sci" data-insert="pi">π</button>
+        <button class="key key-sci" data-insert="e">e</button>
+        <button class="key key-sci" data-insert="!">x!</button>
+        <button class="key key-sci" data-insert="(">(</button>
+        <button class="key key-sci" data-insert=")">)</button>
+        <button class="key key-mode" id="deg-rad-toggle" data-mode="DEG">DEG</button>
+      </div>
+
+      <div class="keypad keypad-4col">
+        <button class="key key-fn" data-action="clear">C</button>
+        <button class="key key-fn" data-action="backspace" aria-label="Apagar último dígito">⌫</button>
+        <button class="key key-sci" data-insert=",">,</button>
+        <button class="key key-op" data-action="op" data-op="/">÷</button>
+
+        <button class="key key-num" data-digit="7">7</button>
+        <button class="key key-num" data-digit="8">8</button>
+        <button class="key key-num" data-digit="9">9</button>
+        <button class="key key-op" data-action="op" data-op="*">×</button>
+
+        <button class="key key-num" data-digit="4">4</button>
+        <button class="key key-num" data-digit="5">5</button>
+        <button class="key key-num" data-digit="6">6</button>
+        <button class="key key-op" data-action="op" data-op="-">−</button>
+
+        <button class="key key-num" data-digit="1">1</button>
+        <button class="key key-num" data-digit="2">2</button>
+        <button class="key key-num" data-digit="3">3</button>
+        <button class="key key-op" data-action="op" data-op="+">+</button>
+
+        <button class="key key-num" data-digit="0" style="grid-column: span 2;">0</button>
+        <button class="key key-fn" data-action="decimal">.</button>
+        <button class="key key-eq" data-action="equals">=</button>
+      </div>
+    </section>
+
+    <!-- ===================== SECÇÃO 3 — CALCULADORA DE MOEDAS ===================== -->
+    <section id="moedas" class="calc-section" role="tabpanel" aria-label="Conversor de moedas" hidden>
+      <div class="currency-card">
+
+        <div class="currency-block">
+          <label class="currency-label" for="currency-amount">De</label>
+          <div class="currency-input-row">
+            <input type="text" inputmode="decimal" id="currency-amount" class="currency-amount" value="1" aria-label="Quantia a converter">
+            <select id="currency-from" class="currency-select" aria-label="Moeda de origem"></select>
+          </div>
+        </div>
+
+        <button class="swap-btn" id="currency-swap" aria-label="Trocar moedas">⇄</button>
+
+        <div class="currency-block">
+          <label class="currency-label" for="currency-to">Para</label>
+          <div class="currency-input-row">
+            <div class="currency-result" id="currency-result" aria-live="polite">0</div>
+            <select id="currency-to" class="currency-select" aria-label="Moeda de destino"></select>
+          </div>
+        </div>
+
+        <p class="currency-rate-note" id="currency-rate-note">A obter taxas de câmbio…</p>
+        <button type="button" class="refresh-btn" id="currency-refresh">
+          <span class="refresh-icon" id="currency-refresh-icon" aria-hidden="true">↻</span>
+          <span id="currency-refresh-label">Actualizar taxas</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ===================== ASSISTENTE (acessível nas três secções) ===================== -->
+<button class="ai-fab" id="ai-fab" aria-label="Abrir assistente">
+  <span aria-hidden="true" id="ai-fab-icon">✦</span>
+</button>
+
+<div class="ai-panel" id="ai-panel" hidden>
+  <div class="ai-panel-header">
+    <span>Assistente</span>
+    <button class="ai-close" id="ai-close" aria-label="Fechar assistente">✕</button>
+  </div>
+
+  <div class="ai-messages" id="ai-messages">
+    <div class="ai-msg ai-msg-bot">
+      Olá! Posso interpretar pedidos como <em>"quanto é 15% de 320 kwanzas"</em> ou <em>"converte 50 dólares para euros"</em>, e explicar o raciocínio passo a passo se pedires. Funciono localmente, sem ligação a nenhum servidor externo.
+    </div>
+  </div>
+
+  <form class="ai-input-row" id="ai-form">
+    <input type="text" id="ai-input" class="ai-input" placeholder="Escreve a tua pergunta…" autocomplete="off" aria-label="Pergunta para o assistente">
+    <button type="submit" class="ai-send" aria-label="Enviar pergunta">➤</button>
+  </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
